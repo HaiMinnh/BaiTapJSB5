@@ -72,37 +72,36 @@ function calculateBillElec() {
 //Bài tập tính thuế
 function calculateTax() {
     let nameThue = document.getElementById('nameThue').value;
-    let income = parseFloat(document.getElementById('income').value);
-    let dependents = parseInt(document.getElementById('dependents').value);
+    let income = document.getElementById('income').value;
+    let dependents = document.getElementById('dependents').value;
 
-    if (isNaN(income) || isNaN(dependents) || income < 0 || dependents < 0) {
-        document.getElementById('result4').innerText = 'Vui lòng nhập thông tin hợp lệ.';
-        return;
+    let thuNhapChiuThue=0;
+     thuNhapChiuThue=income-4000000-dependents*1600000;
+    let thueSuat= 0;
+    if(thuNhapChiuThue<=60000000){
+        thueSuat=5/100;
+    }
+    else if(thuNhapChiuThue>60000000 && thuNhapChiuThue<=120000000){
+        thueSuat+=10/100;
+    } 
+    else if(thuNhapChiuThue>120000000 && thuNhapChiuThue<=210000000){
+        thueSuat+=15/100;
+    } 
+    else if(thuNhapChiuThue>210000000 && thuNhapChiuThue<=384000000){
+        thueSuat+=20/100;
+    } 
+    else if(thuNhapChiuThue>384000000 && thuNhapChiuThue<=624000000){
+        thueSuat+=25/100;
+    } 
+    else if(thuNhapChiuThue>624000000 && thuNhapChiuThue<=960000000){
+        thueSuat+=30/100;
+    } 
+    else{
+        thueSuat+=35/100;
     }
 
-    let taxableIncome = income - 4 - dependents * 1.6;
-
-    let tax = 0;
-
-    if (taxableIncome <= 0) {
-        tax = 0;
-    } else if (taxableIncome <= 60) {
-        tax = taxableIncome * 0.05;
-    } else if (taxableIncome <= 120) {
-        tax = 60 * 0.05 + (taxableIncome - 60) * 0.10;
-    } else if (taxableIncome <= 210) {
-        tax = 60 * 0.05 + 60 * 0.10 + (taxableIncome - 120) * 0.15;
-    } else if (taxableIncome <= 384) {
-        tax = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + (taxableIncome - 210) * 0.20;
-    } else if (taxableIncome <= 624) {
-        tax = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + 174 * 0.20 + (taxableIncome - 384) * 0.25;
-    } else if (taxableIncome <= 960) {
-        tax = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + 174 * 0.20 + 240 * 0.25 + (taxableIncome - 624) * 0.30;
-    } else {
-        tax = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + 174 * 0.20 + 240 * 0.25 + 336 * 0.30 + (taxableIncome - 960) * 0.35;
-    }
-
-    document.getElementById('result4').innerText = `Khách hàng ${nameThue} phải trả: ${tax.toFixed(2)} triệu VND`;
+    let calculateTax=thuNhapChiuThue*thueSuat;
+    document.getElementById('result4').innerText = `Khách hàng ${nameThue} phải trả: ${calculateTax} triệu VND`;
 }
 
 
