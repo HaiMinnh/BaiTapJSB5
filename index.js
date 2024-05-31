@@ -72,8 +72,8 @@ function calculateBillElec() {
 //Bài tập tính thuế
 function calculateTax() {
     let nameThue = document.getElementById('nameThue').value;
-    let income = document.getElementById('income').value;
-    let dependents = document.getElementById('dependents').value;
+    let income = +document.getElementById('income').value;
+    let dependents = +document.getElementById('dependents').value;
 
     let thuNhapChiuThue=0;
      thuNhapChiuThue=income-4000000-dependents*1600000;
